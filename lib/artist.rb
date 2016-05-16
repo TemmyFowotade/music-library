@@ -1,7 +1,7 @@
-require_relative "./concerns/findable"
+require_relative "./concerns/modules.rb"
 
 class Artist
-  include Concerns::Initializers
+  include Concerns::InstanceMethods
   extend Concerns::ClassMethods
 
   def songs
@@ -9,8 +9,8 @@ class Artist
   end
 
   def add_song(song)
-    song.artist = self if song.artist.nil?
-
-    songs.push(song) unless song_exists?(songs, song)
+    songs << song unless songs.include?(song)
+    song.artist = self unless song.artist
   end
+  
 end

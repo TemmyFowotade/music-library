@@ -13,6 +13,7 @@ describe "Songs and Artists" do
       song = Song.new("In an Aeroplane Over the Sea")
 
       artist.songs << song
+        
       expect(artist.songs).to include(song)
     end
   end
@@ -23,7 +24,7 @@ describe "Songs and Artists" do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
-
+  
         expect(song.artist).to eq(artist)
       end
 
@@ -33,6 +34,7 @@ describe "Songs and Artists" do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
+          
 
         expect(artist.songs).to include(song)
       end
@@ -45,6 +47,7 @@ describe "Songs and Artists" do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         artist.add_song(song)
+          
 
         expect(artist.songs).to include(song)
       end
@@ -64,12 +67,13 @@ describe "Songs and Artists" do
         expect(song).to_not receive(:artist=)
 
         artist.add_song(song)
+          
       end
 
       it 'does not add the song to the artist\'s song collection if the artist already has the song' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
-
+  
         artist.add_song(song)
         artist.add_song(song)
 

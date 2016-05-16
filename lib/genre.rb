@@ -1,7 +1,13 @@
-require_relative "./concerns/findable"
+require_relative "./concerns/modules.rb"
 
 class Genre
-	include Concerns::Initializers
-	extend Concerns::ClassMethods
+  include Concerns::InstanceMethods
+  extend Concerns::ClassMethods
 
+  def songs
+    @songs ||= []
+  end
+
+
+  
 end
