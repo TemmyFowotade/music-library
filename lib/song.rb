@@ -3,6 +3,7 @@ require_relative "./concerns/modules.rb"
 class Song
   include Concerns::InstanceMethods
   extend Concerns::ClassMethods
+  extend Concerns::Findable
 
   attr_reader :artist, :genre
 
@@ -17,10 +18,11 @@ class Song
     @artist.add_song(self)
   end
 
-  def genre=(genre)
-    @genre = genre
-    @genre.songs << self unless genre.songs.include?(self)
+  def genre=(name)
+    @genre = name
+    @genre.add_song(self)
+    @artist.add_genre(name) if @artist
+    @genre.add_artist(artist)
   end
 
-a
 end

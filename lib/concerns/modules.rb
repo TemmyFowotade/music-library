@@ -33,5 +33,30 @@ module Concerns
     end
 
   end
+
+  module Findable
+
+    def find_by_name(name)
+      objects = self.all
+      objects.each do |obj|
+        if obj.name == name
+          return obj
+        end
+      end
+    end
+
+    def find_or_create_by_name(name)
+      objects = self.all
+      objects.each do |obj|
+        if obj.name == name
+          return obj
+        else
+          obj = new(obj)
+          obj.create(obj)
+        end
+      end
+    end
+
+  end
   
 end
