@@ -1,62 +1,27 @@
 module Concerns
-
-  module InstanceMethods
-
-    attr_accessor :name
-    @@all = []
-
-    def initialize(name)
-      @name = name
-    end
-
-    def save
-      @@all << self
-    end
-
-  end
-
-
-  module ClassMethods
-
-    def all
-      InstanceMethods.class_variable_get("@@all")
-    end
-
-    def destroy_all
-      InstanceMethods.class_variable_set("@@all", [])
-    end
-
-    def create(name)
-      object = new(name)
-      object.save
-      object
-    end
-
-  end
-
   module Findable
 
     def find_by_name(name)
-      objects = self.all
-      objects.each do |obj|
-        if obj.name == name
-          return obj
-        end
-      end
+      self.all.find {|object| object.name == name}
     end
 
     def find_or_create_by_name(name)
-      objects = self.all
-      objects.each do |obj|
-        if obj.name == name
-          return obj
-        else
-          obj = new(obj)
-          obj.create(obj)
-        end
-      end
+      self.find_by_name(name) || self.create(name)
     end
 
-  end
-  
+    def new_from_filename(name)
+      path_array = name.gsub(".", "-").split("-").map(&:strip)
+      artist = Artist.find_or_create_by_name(path_array[0]) 
+      genre = Genre.find_or_create_by_name(path_array[2])
+      song = Song.new(path_array[1], artist, genre)
+      song
+    end
+
+    def create_from_filename(name)
+      obj = self.new_from_filename(name)
+      obj.save
+      obj    
+    end
+
+  end  
 end
