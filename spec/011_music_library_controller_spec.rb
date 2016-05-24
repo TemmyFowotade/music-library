@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'MusicLibraryController' do
   describe '#initialize' do
     it 'accepts a path to import music' do
-      expect{MusicLibraryController.new('./spec/fixtures/mp3s')}.to_not raise_error
+      expect { MusicLibraryController.new('./spec/fixtures/mp3s') }.to_not raise_error
     end
 
     it 'the path argument defaults to ./db/mp3s' do
@@ -36,9 +36,9 @@ describe 'MusicLibraryController' do
     end
 
     it 'asks the user for input at some point' do
-      music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+      music_libray_controller = MusicLibraryController.new('./spec/fixtures/mp3s')
 
-      expect(music_libray_controller).to receive(:gets).and_return("exit")
+      expect(music_libray_controller).to receive(:gets).and_return('exit')
       music_libray_controller.call
     end
   end

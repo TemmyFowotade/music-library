@@ -1,16 +1,15 @@
-require_relative "../config/environment.rb"
+require_relative '../config/environment.rb'
 
 RSpec.configure do |config|
   config.order = :default
   config.before(:each) do
-    ["Song", "Genre", "Artist"].each do |class_name|
-      if Kernel.const_defined?(class_name)
-        klass = Kernel.const_get(class_name)
-        if klass.respond_to?(:destroy_all)
-          klass.destroy_all
-        else
-          klass.class_variable_set(:@@all, [])
-        end
+    %w(Song Genre Artist).each do |class_name|
+      next unless Kernel.const_defined?(class_name)
+      klass = Kernel.const_get(class_name)
+      if klass.respond_to?(:destroy_all)
+        klass.destroy_all
+      else
+        klass.class_variable_set(:@@all, [])
       end
     end
   end
@@ -18,7 +17,7 @@ end
 
 RSpec::Matchers.define :include_array do |expected|
   match do |actual|
-    actual.any?{|array| match_array(expected).matches?(array)}
+    actual.any? { |array| match_array(expected).matches?(array) }
   end
 end
 
@@ -38,12 +37,10 @@ def get_variable_from_file(file, variable)
 end
 
 def capture_puts
-  begin
-    old_stdout = $stdout
-    $stdout = StringIO.new('','w')
-    yield
-    $stdout.string
-  ensure
-    $stdout = old_stdout
-  end
+  old_stdout = $stdout
+  $stdout = StringIO.new('', 'w')
+  yield
+  $stdout.string
+ensure
+  $stdout = old_stdout
 end

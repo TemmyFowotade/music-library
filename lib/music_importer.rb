@@ -1,7 +1,6 @@
-require_relative "./concerns/modules.rb"
+require_relative './concerns/modules.rb'
 
 class MusicImporter
-
   extend Concerns::Findable
 
   attr_reader :path, :files, :import
@@ -10,12 +9,11 @@ class MusicImporter
     @path = path
   end
 
-  def files  
+  def files
     Dir.entries(@path)[2..-1]
   end
 
   def import
-    files.each {|file| self.class.create_from_filename(file)}
+    files.each { |file| self.class.create_from_filename(file) }
   end
-
 end

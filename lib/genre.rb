@@ -1,4 +1,4 @@
-require_relative "./concerns/modules.rb"
+require_relative './concerns/modules.rb'
 
 class Genre
   extend Concerns::Findable
@@ -46,5 +46,4 @@ class Genre
   def add_artist(artist)
     artists << artist unless artists.include?(artist)
   end
-  
 end
