@@ -43,4 +43,8 @@ class Song
     @artist.add_genre(name) if @artist
     @genre.add_artist(artist)
   end
+
+  def to_s
+    "#{artist.name} - #{name} - #{genre.name}"
+  end
 end

@@ -9,7 +9,7 @@ module Concerns
     end
 
     def new_from_filename(name)
-      path_array = name.tr('.', '-').split('-').map(&:strip)
+      path_array = name.gsub('.mp3', '').split(' - ')
       artist = Artist.find_or_create_by_name(path_array[0])
       genre = Genre.find_or_create_by_name(path_array[2])
       song = Song.new(path_array[1], artist, genre)

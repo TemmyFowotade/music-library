@@ -1,6 +1,7 @@
 require_relative './music_importer'
 
 class MusicLibraryController
+  attr_reader :methods 
   def initialize(path = './db/mp3s')
     music_importer = MusicImporter.new(path)
     music_importer.import
@@ -8,50 +9,62 @@ class MusicLibraryController
 
   def call
     loop do
+      puts "Please enter command: "
       input = gets.chomp
-
-      case input
-      when 'list songs'
-        count = 1
-        Song.all.each do |song|
-          song.genre.name = 'hip-hop' if song.genre.name == 'hip'
-          puts "#{count}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-          count += 1
-        end
-
-      when 'list artists'
-        Artist.all.each { |artist| puts artist.name }
-
-      when 'list genres'
-        Genre.all.each do |genre|
-          genre.name = 'hip-hop' if genre.name == 'hip'
-          puts genre.name
-        end
-
-      when 'play song'
-        Song.all.each do |song|
-          song.genre.name = 'hip-hop' if song.genre.name == 'hip'
-          puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
-        end
-
-      when 'list artist'
-        Song.all.each do |song|
-          if song.artist.songs
-            song.genre.name = 'hip-hop' if song.genre.name == 'hip'
-            puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-          end
-        end
-
-      when 'list genre'
-        Song.all.each do |song|
-          if song.genre.songs
-            puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-          end
-        end
-
-      when 'exit'
-        break
-      end
+      method_name = input.gsub(" ", "_")
+      break if input == 'exit'
+      send(method_name)
     end
   end
+
+  def list_genre 
+    Song.all.each do |song|
+      if song.genre.songs
+        puts "#{song.to_s}"
+      end
+    end
+  end 
+
+  def list_artist 
+    Song.all.each do |song|
+      if song.artist.songs
+        puts "#{song.to_s}"
+      end
+    end
+  end 
+
+  def play_song 
+    puts "Please enter song no: "
+    song_index = gets.chomp.to_i
+    song_play = Song.all[song_index - 1]
+    if song_play     
+      puts "Playing #{song_play}"
+    end
+  end 
+
+  def list_genres 
+    Genre.all.each do |genre|
+      puts genre.name
+    end
+  end 
+
+  def list_artists 
+    Artist.all.each do |artist| 
+      puts artist.name 
+    end
+  end 
+
+  def list_songs 
+    Song.all.to_enum.with_index(1).each do |song, count|
+      puts "#{count}. #{song.to_s}"
+    end
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    self.respond_to?(method_name, include_private) || super 
+  end 
+
+  def method_missing(method_name, *args, &block)
+    self.to_s 
+  end 
 end
