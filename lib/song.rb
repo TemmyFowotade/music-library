@@ -1,10 +1,12 @@
 require_relative './concerns/modules.rb'
 
 class Song
-  extend Concerns::Findable
-
   attr_reader :artist, :genre
   attr_accessor :name
+
+  include Concerns::InstanceMethods
+  extend Concerns::ClassMethods
+  extend Concerns::Findable
 
   @@all = []
 
@@ -12,24 +14,6 @@ class Song
     @name = name
     self.artist = artist unless artist.nil?
     self.genre = genre unless genre.nil?
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all = []
-  end
-
-  def self.create(name)
-    object = new(name)
-    object.save
-    object
   end
 
   def artist=(name)

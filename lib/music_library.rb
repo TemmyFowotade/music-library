@@ -1,7 +1,6 @@
 require_relative './music_importer'
 
 class MusicLibraryController
-  attr_reader :methods 
   def initialize(path = './db/mp3s')
     music_importer = MusicImporter.new(path)
     music_importer.import
@@ -36,9 +35,9 @@ class MusicLibraryController
   def play_song 
     puts "Please enter song no: "
     song_index = gets.chomp.to_i
-    song_play = Song.all[song_index - 1]
-    if song_play     
-      puts "Playing #{song_play}"
+    song_to_play = Song.all[song_index - 1]
+    if song_to_play     
+      puts "Playing #{song_to_play}"
     end
   end 
 
