@@ -1,6 +1,7 @@
 require_relative './music_importer'
 
 class MusicLibraryController
+
   def initialize(path = './db/mp3s')
     music_importer = MusicImporter.new(path)
     music_importer.import
@@ -12,24 +13,22 @@ class MusicLibraryController
       input = gets.chomp
       method_name = input.gsub(" ", "_")
       break if input == 'exit'
-      send(method_name)
+      self.send(method_name)
+    end
+  end
+
+  def list_songs 
+    Song.all.to_enum.with_index(1).each do |song, count|
+      puts "#{count}. #{song.to_s}"
     end
   end
 
   def list_genre 
-    Song.all.each do |song|
-      if song.genre.songs
-        puts "#{song.to_s}"
-      end
-    end
+    print_model_songs(:genre)
   end 
 
   def list_artist 
-    Song.all.each do |song|
-      if song.artist.songs
-        puts "#{song.to_s}"
-      end
-    end
+    print_model_songs(:artist)
   end 
 
   def play_song 
@@ -42,20 +41,24 @@ class MusicLibraryController
   end 
 
   def list_genres 
-    Genre.all.each do |genre|
-      puts genre.name
-    end
+    print_each_name(Genre)
   end 
 
   def list_artists 
-    Artist.all.each do |artist| 
-      puts artist.name 
-    end
+    print_each_name(Artist)
   end 
 
-  def list_songs 
-    Song.all.to_enum.with_index(1).each do |song, count|
-      puts "#{count}. #{song.to_s}"
+  def print_model_songs(model)
+    Song.all.each do |song|
+      if song.send(model).songs
+        puts song.to_s
+      end
+    end
+  end
+
+  def print_each_name(model)
+    model.all.each do |item|
+      puts item.name
     end
   end
 
@@ -66,4 +69,5 @@ class MusicLibraryController
   def method_missing(method_name, *args, &block)
     self.to_s 
   end 
+  
 end

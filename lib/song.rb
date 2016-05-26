@@ -1,14 +1,8 @@
-require_relative './concerns/modules.rb'
+class Song < BaseModel
 
-class Song
-  attr_reader :artist, :genre
-  attr_accessor :name
+  attr_reader :name, :artist, :genre
 
-  include Concerns::InstanceMethods
-  extend Concerns::ClassMethods
-  extend Concerns::Findable
-
-  @@all = []
+  @@all ||= []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name

@@ -1,24 +1,14 @@
-require_relative './concerns/modules.rb'
+class Artist < BaseModel
 
-class Artist
-  include Concerns::InstanceMethods
-  extend Concerns::ClassMethods
-  extend Concerns::Findable
-
-  @@all = []
+  @@all ||= []
 
   def initialize(name)
-    super
+    super(name)
     @@genres = []
   end
 
-  def songs
-    @songs ||= []
-  end
-
   def add_song(song)
-    songs << song unless songs.include?(song)
-    song.artist = self unless song.artist
+    add(:artist, song)
   end
 
   def genres

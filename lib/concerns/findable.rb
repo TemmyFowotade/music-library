@@ -1,40 +1,5 @@
 module Concerns
-
-  module InstanceMethods
-
-    attr_accessor :name
-
-    def initialize(name)
-      @name = name
-    end
-
-    def save
-      unless self.class.all.include?(self)
-        self.class.all << self 
-      end
-    end
-  end
-
-
-  module ClassMethods
-
-    def all
-      self.class_variable_get("@@all")
-    end
-
-    def destroy_all
-      self.class_variable_set("@@all", [])
-    end
-
-    def create(name)
-      object = self.new(name)
-      object.save
-      object
-    end
-  end
-
   module Findable
-
     def find_by_name(name)
       all.find { |object| object.name == name }
     end
@@ -57,5 +22,4 @@ module Concerns
       obj
     end
   end
-  
 end

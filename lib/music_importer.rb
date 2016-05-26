@@ -1,4 +1,4 @@
-require_relative './concerns/modules.rb'
+require_relative './concerns/findable.rb'
 
 class MusicImporter
   extend Concerns::Findable
