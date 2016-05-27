@@ -8,8 +8,16 @@ class MusicLibraryController
     music_importer.import
   end
 
+  def message(str, color = false)
+    if color 
+      print str.colorize(:yellow) 
+    else 
+      print str
+    end
+  end
+
   def command_instructions
-    "Welcome to Themmy Music Library\n\n" +
+    "\nWelcome to Themmy Music Library\n\n" +
     "----------------------------------------------------------------------------\n\n" + 
     "list songs: To list all songs in the music library\n" +
     "play song: To play a song using it's serial number\n" +
@@ -22,7 +30,7 @@ class MusicLibraryController
   def call
     loop do
       puts command_instructions.colorize(:green)
-      print "Please enter command: ".colorize(:yellow)
+      message("Please enter command: ", true)
       input = gets.chomp
       method_name = input.gsub(" ", "_")
       break if input == 'exit'
@@ -31,9 +39,7 @@ class MusicLibraryController
   end
 
   def list_songs 
-    Song.all.to_enum.with_index(1).each do |song, count|
-      puts "#{count}. #{song}"
-    end
+    Song.all.to_enum.with_index(1).each { |song, count| puts "#{count}. #{song}" }
   end
 
   def list_genre
@@ -45,12 +51,10 @@ class MusicLibraryController
   end 
 
   def play_song 
-    print "Please enter song no: ".colorize(:yellow)
+    message("Please enter song no: ", true)
     song_index = gets.chomp.to_i
     song_to_play = Song.all[song_index - 1]
-    if song_to_play     
-      puts "Playing #{song_to_play}"
-    end
+    message("Playing #{song_to_play}") if song_to_play     
   end 
 
   def list_genres 
@@ -62,26 +66,21 @@ class MusicLibraryController
   end 
 
   def print_model_songs(model)
-    print "Please enter #{model}: ".colorize(:yellow)
-    user_input = gets.chomp
-    Song.all.each do |song|
-      puts song.to_s if song.send(model).name == user_input 
-    end
-    nil
+    message("Please enter #{model}: ", true)
+    user_input = gets.chomp 
+    Song.all.each { |song| puts song.to_s if song.send(model).name == user_input } 
   end
 
   def print_each_name(model)
-    model.all.each do |item|
-      puts item.name
-    end
+    model.all.each { |item| puts item.name }
   end
 
   def respond_to_missing?(method_name, include_private = false)
-    self.respond_to?(method_name, include_private) || super 
+    respond_to?(method_name, include_private) || super 
   end 
 
-  def method_missing(_method_name, *_args)
-    self.to_s 
+  def method_missing(method_name, *args)
+    message("Invalid command: #{method_name}\n")
   end 
   
 end
