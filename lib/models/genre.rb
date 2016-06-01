@@ -1,5 +1,4 @@
 class Genre < BaseModel
-
   @@all ||= []
 
   def initialize(name)

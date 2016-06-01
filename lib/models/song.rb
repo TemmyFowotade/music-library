@@ -1,5 +1,4 @@
 class Song < BaseModel
-
   attr_reader :name, :artist, :genre
 
   @@all ||= []
