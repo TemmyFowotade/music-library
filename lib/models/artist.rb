@@ -1,5 +1,4 @@
 class Artist < BaseModel
-
   @@all ||= []
 
   def initialize(name)

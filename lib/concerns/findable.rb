@@ -1,7 +1,7 @@
 module Concerns
   module Findable
     def find_by_name(name)
-      all.find { |object| object.name == name }
+      all.detect { |object| object.name == name }
     end
 
     def find_or_create_by_name(name)
@@ -12,14 +12,12 @@ module Concerns
       path_array = name.gsub('.mp3', '').split(' - ')
       artist = Artist.find_or_create_by_name(path_array[0])
       genre = Genre.find_or_create_by_name(path_array[2])
-      song = Song.new(path_array[1], artist, genre)
-      song
+      Song.new(path_array[1], artist, genre)
     end
 
     def create_from_filename(name)
       obj = new_from_filename(name)
-      obj.save
-      obj
+      obj if obj.save
     end
   end
 end
