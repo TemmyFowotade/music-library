@@ -16,7 +16,7 @@ class Message
     list genre: To list the songs under a specific genre
     list artists: To list all artists whose songs are saved in the music library
     list genres: To list all the genres that the songs belong to
-    help: to view command command instructions
+    help: to view command instructions
     else, enter 'exit'
     msg
     puts msg.colorize(:green)
@@ -31,7 +31,7 @@ class Message
   end
 
   def self.model_info(model)
-    puts "Please enter #{model.to_s.capitalize}: "
+    print "Please enter #{model.to_s.capitalize}: "
   end
 
   def self.invalid_song_number
