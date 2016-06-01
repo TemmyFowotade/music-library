@@ -1,4 +1,4 @@
-require_relative './concerns/findable.rb'
+require_relative '../concerns/findable.rb'
 
 class BaseModel
 
@@ -17,7 +17,7 @@ class BaseModel
   def add(model, song)
     songs << song unless songs.include?(song)
     method_name = model.to_s + "="
-    song.send(method_name, self) unless song.send(model)
+    song.public_send(method_name, self) unless song.public_send(model)
   end
 
   def save
@@ -33,9 +33,8 @@ class BaseModel
   end
 
   def self.create(name)
-    object = new(name)
-    object.save
-    object
+    obj = new(name)
+    obj if obj.save
   end
 
 end
