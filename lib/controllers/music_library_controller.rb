@@ -13,7 +13,7 @@ class MusicLibraryController
       input = gets.chomp
       method_name = input.tr(' ', '_').to_sym
       break if input == 'exit'
-      public_send(method_name)
+      send(method_name)
     end
   end
 
