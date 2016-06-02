@@ -23,11 +23,11 @@ class Message
   end
 
   def self.enter_command
-    print 'Please enter command: '.colorize(:yellow)
+    print "Please enter command: ".colorize(:yellow)
   end
 
   def self.enter_song_number
-    print 'Please enter song number: '.colorize(:yellow)
+    print "Please enter song number: ".colorize(:yellow)
   end
 
   def self.model_info(model)
