@@ -4,7 +4,7 @@ class BaseModel
   extend Concerns::Findable
 
   attr_accessor :name, :songs
-
+  
   def initialize(name)
     @name = name
   end
@@ -16,7 +16,7 @@ class BaseModel
   def add(model, song)
     songs << song unless songs.include?(song)
     method_name = model.to_s + '='
-    song.public_send(method_name, self) unless song.public_send(model)
+    song.send(method_name, self) unless song.send(model)
   end
 
   def save
@@ -24,12 +24,12 @@ class BaseModel
   end
 
   def self.all
-    class_variable_get('@@all')
+    class_variable_get(:@@all)
   end
 
   def self.destroy_all
-    class_variable_set('@@all', [])
-  endg
+    class_variable_set(:@@all, [])
+  end
 
   def self.create(name)
     obj = new(name)
