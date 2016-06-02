@@ -29,7 +29,7 @@ class BaseModel
 
   def self.destroy_all
     class_variable_set('@@all', [])
-  end
+  endg
 
   def self.create(name)
     obj = new(name)
