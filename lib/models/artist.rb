@@ -1,9 +1,13 @@
 class Artist < BaseModel
-  @@all ||= []
 
   def initialize(name)
     super(name)
+    #@@all ||= []
     @@genres = []
+  end
+
+  def self.all
+    @@all ||= []
   end
 
   def add_song(song)
