@@ -77,8 +77,7 @@ Please enter command: play song
 Please enter song number: 1
 Playing Action Bronson - Larry Csonka - indie
 ```
-
-3. Enter `help` at anytime to view command instructions.
+3.  Enter `help` at anytime to view command instructions.
 
 ## Tests
 
