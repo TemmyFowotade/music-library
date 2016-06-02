@@ -23,16 +23,12 @@ class BaseModel
     self.class.all << self unless self.class.all.include?(self)
   end
 
-  def self.all
-    class_variable_get(:@@all)
-  end
-
   def self.destroy_all
-    class_variable_set(:@@all, [])
+    all.clear
   end
 
   def self.create(name)
-    obj = new(name)
-    obj if obj.save
+    model = new(name)
+    model if model.save
   end
 end

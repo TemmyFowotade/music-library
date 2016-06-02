@@ -4,20 +4,23 @@ class Song < BaseModel
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @@all ||= []
     self.artist = artist unless artist.nil?
     self.genre = genre unless genre.nil?
   end
 
-  def artist=(name)
-    @artist = name
+  def self.all
+    @@all ||= []
+  end
+
+  def artist=(obj)
+    @artist = obj
     @artist.add_song(self)
   end
 
-  def genre=(name)
-    @genre = name
+  def genre=(obj)
+    @genre = obj
     @genre.add_song(self)
-    @artist.add_genre(name) if @artist
+    @artist.add_genre(obj) if @artist
     @genre.add_artist(artist)
   end
 

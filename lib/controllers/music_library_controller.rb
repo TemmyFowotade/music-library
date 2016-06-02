@@ -18,7 +18,7 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.to_enum.with_index(1).each do |song, count|
+    Song.all.each.with_index(1) do |song, count|
       Message.notice("#{count}. #{song}", :cyan)
     end
   end
@@ -48,7 +48,7 @@ class MusicLibraryController
     Message.model_info(model)
     user_input = gets.chomp
     Song.all.each do |song|
-      puts song.to_s if song.public_send(model).name == user_input
+      puts song.to_s if song.send(model).name == user_input
     end
   end
 
