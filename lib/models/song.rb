@@ -1,10 +1,10 @@
 class Song < BaseModel
-  attr_reader :name, :artist, :genre
 
-  @@all ||= []
+  attr_reader :name, :artist, :genre
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
+    @@all ||= []
     self.artist = artist unless artist.nil?
     self.genre = genre unless genre.nil?
   end

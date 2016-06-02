@@ -1,8 +1,8 @@
 class Genre < BaseModel
-  @@all ||= []
 
   def initialize(name)
     super(name)
+    @@all ||= []
     @@artists = []
   end
 
