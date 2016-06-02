@@ -1,4 +1,4 @@
-# Ruby Music Library [![Build Status](https://travis-ci.org/temifowotade/music-library.svg?branch=master)
+# Ruby Music Library ![Build Status](https://travis-ci.org/temifowotade/music-library.svg?branch=master)
 
 ## Overview
 
@@ -70,7 +70,7 @@ Please enter command:
     7. Azealia Banks - 212 - hip-hop
     ...
   ```
-2. `play song`: enter "1" when prompted for song number, to play the first song:
+2. `play song`: enter "1" when prompted for song number to play the first song:
     
 ```bash
 Please enter command: play song
