@@ -59,9 +59,7 @@ class MusicLibraryController
   def validate_song_number(str)
     song_num = str.to_i
     song_length = Song.all.length
-    if !is_i?(str)
-      Message.enter_song_number
-    elsif song_num > song_length || song_num < 1
+    if !is_i?(str) || song_num > song_length || song_num < 1
       Message.invalid_song_number
     else
       song_to_play = Song.all[song_num - 1]
