@@ -9,10 +9,6 @@ class Genre < BaseModel
     @@all ||= []
   end
 
-  def add_song(song)
-    add(:genre, song)
-  end
-
   def artists
     @@artists
   end
