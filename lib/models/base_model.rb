@@ -13,10 +13,11 @@ class BaseModel
     @songs ||= []
   end
 
-  def add(model, song)
-    songs << song unless songs.include?(song)
-    method_name = model.to_s + '='
-    song.send(method_name, self) unless song.send(model)
+  def add_song(song)
+    unless @songs.include?(song)
+      @songs << song
+      song.send(self.class.name.downcase+"=", self)
+    end
   end
 
   def save
