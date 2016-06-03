@@ -1,5 +1,6 @@
 module Concerns
   module Findable
+
     def find_by_name(name)
       all.detect { |object| object.name == name }
     end
@@ -19,5 +20,6 @@ module Concerns
       obj = new_from_filename(name)
       obj if obj.save
     end
+    
   end
 end

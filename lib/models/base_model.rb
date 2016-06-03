@@ -2,22 +2,13 @@ require_relative '../concerns/findable.rb'
 
 class BaseModel
   extend Concerns::Findable
+  include Concerns::InstanceMethods
 
   attr_accessor :name, :songs
   
   def initialize(name)
     @name = name
-  end
-
-  def songs
-    @songs ||= []
-  end
-
-  def add_song(song)
-    unless @songs.include?(song)
-      @songs << song
-      song.send(self.class.name.downcase+"=", self)
-    end
+    @songs = []
   end
 
   def save
@@ -33,3 +24,6 @@ class BaseModel
     model if model.save
   end
 end
+
+
+
