@@ -10,15 +10,15 @@ module Concerns
     end
 
     def new_from_filename(name)
-      path_array = name.gsub('.mp3', '').split(' - ')
-      artist = Artist.find_or_create_by_name(path_array[0])
-      genre = Genre.find_or_create_by_name(path_array[2])
-      Song.new(path_array[1], artist, genre)
+      path_files = name.gsub('.mp3', '').split(' - ')
+      artist = Artist.find_or_create_by_name(path_files[0])
+      genre = Genre.find_or_create_by_name(path_files[2])
+      Song.new(path_files[1], artist, genre)
     end
 
     def create_from_filename(name)
-      obj = new_from_filename(name)
-      obj if obj.save
+      object = new_from_filename(name)
+      object if object.save
     end
     
   end
