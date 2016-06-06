@@ -69,11 +69,11 @@ class MusicLibraryController
 
   private
 
-  def is_i?(integer)
-    /\A[-+]?\d+\z/ === integer.to_s
+  def is_i?(song_index)
+    /\A[-+]?\d+\z/ === song_index.to_s
   end
 
-  def method_missing(method_name, *_arguments)
+  def method_missing(method_name, *arguments)
     if method_name.eql?(:help)
       Message.command_instructions
     else

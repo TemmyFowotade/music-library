@@ -12,15 +12,15 @@ class Song < BaseModel
     @@all ||= []
   end
 
-  def artist=(object)
-    @artist = object
+  def artist=(artist)
+    @artist = artist
     @artist.add_song(self)
   end
 
-  def genre=(object)
-    @genre = object
+  def genre=(genre)
+    @genre = genre
     @genre.add_song(self)
-    @artist.add_genre(object) if @artist
+    @artist.add_genre(genre) if @artist
     @genre.add_artist(artist)
   end
 
