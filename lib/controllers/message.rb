@@ -1,12 +1,12 @@
 require 'colorize'
 
 class Message
-  def self.notice(str, color = :yellow)
-    puts str.colorize(color)
+  def self.notice(message, color = :yellow)
+    puts message.colorize(color)
   end
 
   def self.command_instructions
-    msg = <<-msg
+    message = <<-msg
 
     Welcome to Themmy Music Library
     ----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ class Message
     help: to view command instructions
     else, enter 'exit'
     msg
-    puts msg.colorize(:green)
+    puts message.colorize(:green)
   end
 
   def self.enter_command

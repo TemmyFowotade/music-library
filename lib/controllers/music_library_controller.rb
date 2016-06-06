@@ -1,8 +1,8 @@
 require_relative '../music_importer'
 
 class MusicLibraryController
-  def initialize(path = './db/mp3s')
-    music_importer = MusicImporter.new(path)
+  def initialize(file_path = './db/mp3s')
+    music_importer = MusicImporter.new(file_path)
     music_importer.import
   end
 
@@ -11,8 +11,8 @@ class MusicLibraryController
     loop do
       Message.enter_command
       input = gets.chomp
-      method_name = input.tr(' ', '_').to_sym
       break if input == 'exit'
+      method_name = input.tr(' ', '_').to_sym
       send(method_name)
     end
   end
@@ -56,24 +56,24 @@ class MusicLibraryController
     model.all.each { |item| puts item.name }
   end
 
-  def validate_song_number(str)
-    song_num = str.to_i
+  def validate_song_number(string)
+    song_number = string.to_i
     song_length = Song.all.length
-    if !is_i?(str) || song_num > song_length || song_num < 1
+    if !is_i?(string) || song_number > song_length || song_number < 1
       Message.invalid_song_number
     else
-      song_to_play = Song.all[song_num - 1]
+      song_to_play = Song.all[song_number - 1]
       Message.playing_song(song_to_play)
     end
   end
 
   private
 
-  def is_i?(str)
-    /\A[-+]?\d+\z/ === str.to_s
+  def is_i?(string)
+    /\A[-+]?\d+\z/ === string.to_s
   end
 
-  def method_missing(method_name, *_args)
+  def method_missing(method_name, *_arguments)
     if method_name.eql?(:help)
       Message.command_instructions
     else

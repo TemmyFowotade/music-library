@@ -39,7 +39,7 @@ User is able to do the following in the application:
 To start the application, `cd` into the `music-library` folder and run `bin/musiclibrary`.
 
 ```bash
-$  bin/musiclibrary
+$  bin/music_library
 
   Welcome to Themmy Music Library
   ----------------------------------------------------------------------------

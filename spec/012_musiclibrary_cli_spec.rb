@@ -5,7 +5,7 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return('list songs', 'exit')
 
-    output = capture_puts { run_file('./bin/musiclibrary') }
+    output = capture_puts { run_file('./bin/music_library') }
 
     expect(output).to include('1. Action Bronson - Larry Csonka - indie')
     expect(output).to include('2. Real Estate - Green Aisles - country')
@@ -19,7 +19,7 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return('list artists', 'exit')
 
-    output = capture_puts { run_file('./bin/musiclibrary') }
+    output = capture_puts { run_file('./bin/music_library') }
 
     expect(output).to include('Action Bronson')
     expect(output).to include('Real Estate')
@@ -32,7 +32,7 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return('list genres', 'exit')
 
-    output = capture_puts { run_file('./bin/musiclibrary') }
+    output = capture_puts { run_file('./bin/music_library') }
 
     expect(output).to include('indie')
     expect(output).to include('country')
@@ -46,7 +46,7 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return('play song', '1', 'exit')
 
-    output = capture_puts { run_file('./bin/musiclibrary') }
+    output = capture_puts { run_file('./bin/music_library') }
 
     expect(output).to include('Playing Action Bronson - Larry Csonka - indie')
   end
@@ -57,7 +57,7 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return('list artist', 'Real Estate', 'exit')
 
-    output = capture_puts { run_file('./bin/musiclibrary') }
+    output = capture_puts { run_file('./bin/music_library') }
 
     expect(output).to include('Real Estate - Green Aisles - country')
     expect(output).to include("Real Estate - It's Real - hip-hop")
@@ -69,7 +69,7 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return('list genre', 'dance', 'exit')
 
-    output = capture_puts { run_file('./bin/musiclibrary') }
+    output = capture_puts { run_file('./bin/music_library') }
 
     expect(output).to include('Thundercat - For Love I Come - dance')
   end
