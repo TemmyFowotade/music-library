@@ -1,4 +1,5 @@
 require_relative '../music_importer'
+require_relative 'message'
 
 class MusicLibraryController
   def initialize(file_path = './db/mp3s')
