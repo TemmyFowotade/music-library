@@ -1,4 +1,5 @@
 require_relative '../music_importer'
+require_relative 'message'
 
 class MusicLibraryController
   def initialize(file_path = './db/mp3s')
@@ -56,10 +57,10 @@ class MusicLibraryController
     model.all.each { |item| puts item.name }
   end
 
-  def validate_song_number(string)
-    song_number = string.to_i
+  def validate_song_number(song_index)
+    song_number = song_index.to_i
     song_length = Song.all.length
-    if !is_i?(string) || song_number > song_length || song_number < 1
+    if !is_i?(song_index) || song_number > song_length || song_number < 1
       Message.invalid_song_number
     else
       song_to_play = Song.all[song_number - 1]
@@ -69,11 +70,11 @@ class MusicLibraryController
 
   private
 
-  def is_i?(string)
-    /\A[-+]?\d+\z/ === string.to_s
+  def is_i?(song_index)
+    /\A[-+]?\d+\z/ === song_index.to_s
   end
 
-  def method_missing(method_name, *_arguments)
+  def method_missing(method_name, *arguments)
     if method_name.eql?(:help)
       Message.command_instructions
     else

@@ -1,4 +1,4 @@
-# Ruby Music Library ![Build Status](https://travis-ci.org/temifowotade/music-library.svg?branch=master)
+# Ruby Music Library [![Build Status](https://travis-ci.org/andela-tfowotade/music-library.svg?branch=master)](https://travis-ci.org/andela-tfowotade/music-library)
 
 ## Overview
 
